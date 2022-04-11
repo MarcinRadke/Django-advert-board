@@ -1,0 +1,55 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="OfferIdFilter" class="form-control"
+                    (keyup)="Filtering()" placeholder="Filter by id">
+                </div>
+                OfferId</th>
+            <th>
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="OfferTitleFilter" class="form-control"
+                    (keyup)="Filtering()" placeholder="Filter by title">
+                </div>
+                Title</th>
+            <th>Price</th>
+            <th>
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="OfferCategoryFilter" class="form-control"
+                    (keyup)="Filtering()" placeholder="Filter by category id">
+                </div>
+                Category</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of OfferList">
+            <td>{{dataItem.id}}</td>
+            <td>{{dataItem.title}}</td>
+            <td>{{dataItem.price}}</td>
+            <td>{{getCategoryId(dataItem.category)}}</td>
+            <td>
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">{{dataItem.title}}</h4>
+                      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="mb-3">
+                          <label>{{showDetails(dataItem.id)}}<br>{{showDate(dataItem.id)}}</label>
+                        </div>
+                      </form>
+                    </div>
+                  </ng-template>
+                
+                  <button class="btn btn-light mr-1" (click)="open(content)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                    </svg>
+                    </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
